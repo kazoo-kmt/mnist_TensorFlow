@@ -83,4 +83,8 @@ class MetalCNNBasicViewController: UIViewController {
         predictionLabel.text = "\(label)"
         clearBtn.isHidden = false
     }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    network.close()
+  }
 }

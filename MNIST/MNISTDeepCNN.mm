@@ -45,35 +45,68 @@ using namespace tensorflow;
 static constexpr int kImageSide = 28;
 static constexpr int kOutputs = 10;
 static constexpr int kInputLength = kImageSide * kImageSide;
+Session* session;
+Status status;
 
 @implementation MNISTDeepCNN
+
++ (void)initialize
+{
+  if (self == [MNISTDeepCNN class]) {
+    NSLog(@"MNISTDeepCNN is initialized");
+    
+//    Session* session;
+//    Status status = NewSession(SessionOptions(), &session);
+    status = NewSession(SessionOptions(), &session);
+    if (!status.ok()) {
+      std::cout << status.ToString() << "\n";
+      return;
+    }
+    
+    NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"final" ofType:@"pb"];
+    
+    GraphDef graph;
+    status = ReadBinaryProto(Env::Default(), modelPath.fileSystemRepresentation, &graph);
+    if (!status.ok()) {
+      std::cout << status.ToString() << "\n";
+      return;
+    }
+    
+    status = session->Create(graph);
+    if (!status.ok()) {
+      std::cout << status.ToString() << "\n";
+      return;
+    }
+    
+  }
+}
 
 - (int)forward: (void *)ptrImage {
 //- (IBAction)test:(id)sender {
   int label = 99;
 
 
-	Session* session;
-	Status status = NewSession(SessionOptions(), &session);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return -1;
-	}
-
-	NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"final" ofType:@"pb"];
-
-	GraphDef graph;
-	status = ReadBinaryProto(Env::Default(), modelPath.fileSystemRepresentation, &graph);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return -1;
-	}
-
-	status = session->Create(graph);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return -1;
-	}
+//	Session* session;
+//	Status status = NewSession(SessionOptions(), &session);
+//	if (!status.ok()) {
+//		std::cout << status.ToString() << "\n";
+//		return -1;
+//	}
+//
+//	NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"final" ofType:@"pb"];
+//
+//	GraphDef graph;
+//	status = ReadBinaryProto(Env::Default(), modelPath.fileSystemRepresentation, &graph);
+//	if (!status.ok()) {
+//		std::cout << status.ToString() << "\n";
+//		return -1;
+//	}
+//
+//	status = session->Create(graph);
+//	if (!status.ok()) {
+//		std::cout << status.ToString() << "\n";
+//		return -1;
+//	}
   
 
 //  Tensor x(DT_FLOAT, TensorShape({ kUsedExamples, kInputLength }));
@@ -144,9 +177,15 @@ static constexpr int kInputLength = kImageSide * kImageSide;
 //	NSLog(@"Accuracy: %f", static_cast<float>(correctExamples) / kUsedExamples);
 
 //	delete[] expectedLabels;
-	session->Close();
+//	session->Close();
   
   return label;
 }
+
+- (void)close {
+  session->Close();
+  NSLog(@"MNISTDeepCNN's session is closed");
+}
+
 
 @end
