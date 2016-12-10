@@ -84,8 +84,9 @@ Status status;
 - (int)forward: (void *)ptrImage {
 //- (IBAction)test:(id)sender {
   int label = 99;
-
-
+  
+  @autoreleasepool {
+    
 //	Session* session;
 //	Status status = NewSession(SessionOptions(), &session);
 //	if (!status.ok()) {
@@ -178,7 +179,8 @@ Status status;
 
 //	delete[] expectedLabels;
 //	session->Close();
-  
+  }
+
   return label;
 }
 
