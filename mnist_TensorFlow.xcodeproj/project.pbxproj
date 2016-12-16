@@ -11,7 +11,7 @@
 		C90BBF561DE7D561001F85D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C90BBF551DE7D561001F85D7 /* Assets.xcassets */; };
 		C90BBF591DE7D561001F85D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C90BBF571DE7D561001F85D7 /* LaunchScreen.storyboard */; };
 		C90BBF621DE7D62A001F85D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C90BBF611DE7D62A001F85D7 /* Accelerate.framework */; };
-		C90BBF641DE7F041001F85D7 /* final.pb in Resources */ = {isa = PBXBuildFile; fileRef = C90BBF631DE7F041001F85D7 /* final.pb */; };
+		C923C91D1E03AACF009D4BA8 /* final.pb in Resources */ = {isa = PBXBuildFile; fileRef = C923C91C1E03AACF009D4BA8 /* final.pb */; };
 		C94DE2B91DF4F86400D0E15F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DE2B51DF4F86400D0E15F /* AppDelegate.swift */; };
 		C94DE2BA1DF4F86500D0E15F /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DE2B61DF4F86400D0E15F /* DrawView.swift */; };
 		C94DE2BB1DF4F86500D0E15F /* MetalCNNBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94DE2B71DF4F86400D0E15F /* MetalCNNBasicViewController.swift */; };
@@ -27,7 +27,7 @@
 		C90BBF581DE7D561001F85D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C90BBF5A1DE7D561001F85D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C90BBF611DE7D62A001F85D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		C90BBF631DE7F041001F85D7 /* final.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = final.pb; sourceTree = "<group>"; };
+		C923C91C1E03AACF009D4BA8 /* final.pb */ = {isa = PBXFileReference; lastKnownFileType = file; path = final.pb; sourceTree = "<group>"; };
 		C94DE2B51DF4F86400D0E15F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C94DE2B61DF4F86400D0E15F /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		C94DE2B71DF4F86400D0E15F /* MetalCNNBasicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalCNNBasicViewController.swift; sourceTree = "<group>"; };
@@ -68,11 +68,11 @@
 		C90BBF481DE7D560001F85D7 /* mnist_TensorFlow */ = {
 			isa = PBXGroup;
 			children = (
+				C923C91C1E03AACF009D4BA8 /* final.pb */,
 				C94DE2B51DF4F86400D0E15F /* AppDelegate.swift */,
 				C94DE2B61DF4F86400D0E15F /* DrawView.swift */,
 				C94DE2B71DF4F86400D0E15F /* MetalCNNBasicViewController.swift */,
 				C94DE2B81DF4F86400D0E15F /* UIViewController+alert.swift */,
-				C90BBF631DE7F041001F85D7 /* final.pb */,
 				C90BBF4F1DE7D560001F85D7 /* MNISTDeepCNN.h */,
 				C90BBF501DE7D560001F85D7 /* MNISTDeepCNN.mm */,
 				C90BBF551DE7D561001F85D7 /* Assets.xcassets */,
@@ -155,8 +155,8 @@
 			files = (
 				C94DE2BF1DF4F88600D0E15F /* MetalCNNBasic.storyboard in Resources */,
 				C90BBF591DE7D561001F85D7 /* LaunchScreen.storyboard in Resources */,
+				C923C91D1E03AACF009D4BA8 /* final.pb in Resources */,
 				C90BBF561DE7D561001F85D7 /* Assets.xcassets in Resources */,
-				C90BBF641DE7F041001F85D7 /* final.pb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
