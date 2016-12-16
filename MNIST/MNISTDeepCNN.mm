@@ -41,7 +41,6 @@
 
 using namespace tensorflow;
 
-//static constexpr int kUsedExamples = 5000;
 static constexpr int kImageSide = 28;
 static constexpr int kOutputs = 10;
 static constexpr int kInputLength = kImageSide * kImageSide;
@@ -55,8 +54,6 @@ Status status;
   if (self == [MNISTDeepCNN class]) {
     NSLog(@"MNISTDeepCNN is initialized");
     
-//    Session* session;
-//    Status status = NewSession(SessionOptions(), &session);
     status = NewSession(SessionOptions(), &session);
     if (!status.ok()) {
       std::cout << status.ToString() << "\n";
@@ -82,61 +79,20 @@ Status status;
 }
 
 - (int)forward: (void *)ptrImage {
-//- (IBAction)test:(id)sender {
   int label = 99;
   
   @autoreleasepool {
-    
-//	Session* session;
-//	Status status = NewSession(SessionOptions(), &session);
-//	if (!status.ok()) {
-//		std::cout << status.ToString() << "\n";
-//		return -1;
-//	}
-//
-//	NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"final" ofType:@"pb"];
-//
-//	GraphDef graph;
-//	status = ReadBinaryProto(Env::Default(), modelPath.fileSystemRepresentation, &graph);
-//	if (!status.ok()) {
-//		std::cout << status.ToString() << "\n";
-//		return -1;
-//	}
-//
-//	status = session->Create(graph);
-//	if (!status.ok()) {
-//		std::cout << status.ToString() << "\n";
-//		return -1;
-//	}
-  
 
-//  Tensor x(DT_FLOAT, TensorShape({ kUsedExamples, kInputLength }));
   Tensor x(DT_FLOAT, TensorShape({ 1, kInputLength }));
 
-//	NSString *imagesPath = [[NSBundle mainBundle] pathForResource:@"images" ofType:nil];
-//	NSString *labelsPath = [[NSBundle mainBundle] pathForResource:@"labels" ofType:nil];
-//	NSData *imageData = [NSData dataWithContentsOfFile:imagesPath];
   NSData *imageData = [NSData dataWithBytes:ptrImage length:kInputLength*sizeof(float)];
-//	NSData *labelsData = [NSData dataWithContentsOfFile:labelsPath];
-
-//	uint8_t *expectedLabels = new uint8_t[kUsedExamples];
-
-//	for (auto exampleIndex = 0; exampleIndex < kUsedExamples; exampleIndex++) {
-//		// Actual labels start at offset 8.
-//		[labelsData getBytes:&expectedLabels[exampleIndex] range:NSMakeRange(8 + exampleIndex, 1)];
 
   for (auto i = 0; i < kInputLength; i++) {
     uint8_t pixel;
-    // Actual image data starts at offset 16.
-//      [imageData getBytes:&pixel range:NSMakeRange(16 + exampleIndex * kInputLength + i, 1)];
-//    [imageData getBytes:&pixel range:NSMakeRange(exampleIndex * kInputLength + i, 1)];
     [imageData getBytes:&pixel range:NSMakeRange(i, 1)];
     
-    
-//      x.matrix<float>().operator()(exampleIndex, i) = pixel / 255.0f;
     x.matrix<float>().operator()(i) = pixel / 255.0f;
   }
-//  }
 
 	std::vector<std::pair<string, Tensor>> inputs = {
 		{ "x", x }
@@ -154,33 +110,19 @@ Status status;
 	NSLog(@"Time: %g seconds", CACurrentMediaTime() - start);
 
 	const auto outputMatrix = outputs[0].matrix<float>();
-//	int correctExamples = 0;
 
-//	for (auto exampleIndex = 0; exampleIndex < kUsedExamples; exampleIndex++) {
   int bestIndex = -1;
   float bestProbability = 0;
   for (auto i = 0; i < kOutputs; i++) {
-//      const auto probability = outputMatrix(exampleIndex, i);
     const auto probability = outputMatrix(i);
     if (probability > bestProbability) {
       bestProbability = probability;
       bestIndex = i;
       NSLog(@"%i", bestIndex);
     }
-//		}
-
-//		if (bestIndex == expectedLabels[exampleIndex]) {
-//			correctExamples++;
-//		}
-	}
-  label = bestIndex;
-
-//	NSLog(@"Accuracy: %f", static_cast<float>(correctExamples) / kUsedExamples);
-
-//	delete[] expectedLabels;
-//	session->Close();
   }
-
+  label = bestIndex;
+  }
   return label;
 }
 
@@ -188,6 +130,5 @@ Status status;
   session->Close();
   NSLog(@"MNISTDeepCNN's session is closed");
 }
-
 
 @end
